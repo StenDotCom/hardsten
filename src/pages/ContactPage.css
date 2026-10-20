@@ -1,0 +1,9 @@
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-page .phead {
+  margin-bottom: 4px;
+}

@@ -1,0 +1,343 @@
+.lbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 2.5vw, 24px);
+  background: rgba(6, 12, 26, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: route-in 0.18s var(--ease-out);
+}
+
+.lbox__dialog {
+  width: min(100%, 740px);
+  max-width: 100%;
+  max-height: min(88vh, 650px);
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  color: var(--navy);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 24px 60px -15px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px var(--line-strong);
+  overflow: hidden;
+}
+
+.lbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.lbox__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1 1 0%;
+  overflow: hidden;
+  font-size: 13.5px;
+}
+
+.lbox__count {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--navy);
+  color: var(--cream);
+  flex-shrink: 0;
+}
+
+.lbox__cap {
+  font-weight: 600;
+  color: var(--navy);
+  min-width: 0;
+  flex: 1 1 0%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lbox__phtag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--tint);
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.lbox__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.lbox__zoom-ctrl {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--tint);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  overflow: hidden;
+}
+
+.lbox__zbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 30px;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.lbox__zbtn:hover:not(:disabled) {
+  background: var(--line);
+}
+
+.lbox__zbtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.lbox__zval {
+  min-width: 46px;
+  height: 30px;
+  padding: 0 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+}
+
+.lbox__zval:hover {
+  color: var(--accent-ink);
+}
+
+.lbox__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--cream);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.lbox__close:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.lbox__stage {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 56px;
+  background: #ffffff;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.lbox__stage.is-zoomed {
+  cursor: grab;
+}
+
+.lbox__stage.is-zoomed.is-dragging {
+  cursor: grabbing;
+}
+
+.lbox__figure {
+  margin: 0;
+  width: 100%;
+  height: clamp(260px, 52vh, 440px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  display: block;
+  user-select: none;
+  transform-origin: center center;
+  transition: transform 0.12s ease-out;
+}
+
+.lbox__stage.is-dragging .lbox__img {
+  transition: none;
+}
+
+.lbox__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(14, 29, 58, 0.85);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  z-index: 2;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.lbox__arrow:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.lbox__arrow--prev {
+  left: 12px;
+}
+
+.lbox__arrow--next {
+  right: 12px;
+}
+
+.lbox__thumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.lbox__thumb {
+  width: 56px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.55;
+  flex-shrink: 0;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.lbox__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 2px;
+}
+
+.lbox__thumb:hover,
+.lbox__thumb.is-active {
+  opacity: 1;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Tablet view */
+@media (max-width: 900px) {
+  .lbox__dialog {
+    width: min(100%, 640px);
+    max-height: 86vh;
+  }
+  .lbox__figure {
+    height: clamp(230px, 46vh, 380px);
+  }
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+  .lbox {
+    padding: 10px;
+  }
+  .lbox__dialog {
+    width: 100%;
+    max-height: 86vh;
+    border-radius: var(--radius-md);
+  }
+  .lbox__bar {
+    padding: 10px 12px;
+  }
+  .lbox__cap {
+    font-size: 12px;
+  }
+  .lbox__close {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .lbox__stage {
+    padding: 10px 44px;
+  }
+  .lbox__figure {
+    height: clamp(200px, 42vh, 300px);
+  }
+  .lbox__arrow {
+    width: 34px;
+    height: 34px;
+  }
+  .lbox__arrow--prev {
+    left: 6px;
+  }
+  .lbox__arrow--next {
+    right: 6px;
+  }
+  .lbox__thumbs {
+    justify-content: flex-start;
+    padding: 8px 10px;
+  }
+  .lbox__thumb {
+    width: 48px;
+    height: 34px;
+  }
+}

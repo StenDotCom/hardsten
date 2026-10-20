@@ -1,0 +1,300 @@
+.a11y {
+  position: fixed;
+  left: clamp(16px, 3vw, 24px);
+  bottom: clamp(16px, 3vw, 24px);
+  z-index: 800;
+  font-family: var(--font-display);
+}
+
+@media (max-width: 1099px) {
+  .a11y {
+    left: 14px;
+    bottom: calc(var(--tabbar-h) + 24px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+.a11y__button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: #0B1E3F;
+  color: #F4F4ED;
+  border: 1px solid rgba(244, 244, 237, .16);
+  border-radius: 50%;
+  box-shadow: 0 16px 38px -16px rgba(6, 12, 26, .65);
+  cursor: pointer;
+  transition: transform var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out);
+}
+
+.a11y__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px -18px rgba(6, 12, 26, .8);
+}
+
+.a11y__button:active {
+  transform: scale(.96);
+}
+
+.a11y__button:focus-visible,
+.a11y__close:focus-visible,
+.a11y__size:focus-visible,
+.a11y__switch:focus-visible,
+.a11y__reset:focus-visible {
+  outline: 2px solid #2C84DD;
+  outline-offset: 2px;
+}
+
+.a11y__panel {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 12px);
+  width: min(300px, calc(100vw - 28px));
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #0B1E3F;
+  color: #F4F4ED;
+  border: 1px solid rgba(244, 244, 237, .14);
+  border-radius: 18px;
+  box-shadow: 0 30px 60px -20px rgba(6, 12, 26, .75);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(.98);
+  transform-origin: bottom left;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out),
+    visibility 0s linear var(--dur-med);
+}
+
+.a11y.is-open .a11y__panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out);
+}
+
+.a11y__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.a11y__title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: #FFFFFF;
+}
+
+.a11y__close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(244, 244, 237, .08);
+  border: none;
+  border-radius: 9px;
+  color: rgba(244, 244, 237, .78);
+  cursor: pointer;
+}
+
+.a11y__close:hover {
+  background: rgba(244, 244, 237, .16);
+  color: #FFFFFF;
+}
+
+.a11y__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(244, 244, 237, .58);
+}
+
+.a11y__sizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.a11y__size {
+  height: 42px;
+  background: rgba(244, 244, 237, .09);
+  border: 1px solid rgba(244, 244, 237, .14);
+  border-radius: 10px;
+  color: #FFFFFF;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.a11y__size:nth-child(2) {
+  font-size: 16px;
+}
+
+.a11y__size:nth-child(3) {
+  font-size: 18px;
+}
+
+.a11y__size:hover {
+  background: rgba(244, 244, 237, .15);
+}
+
+.a11y__size.is-on {
+  background: #0066CC;
+  border-color: #0066CC;
+  color: #FFFFFF;
+}
+
+.a11y__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.a11y__switch {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 10px;
+  background: transparent;
+  border: none;
+  border-radius: 11px;
+  color: #FFFFFF;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.a11y__switch:hover {
+  background: rgba(244, 244, 237, .08);
+}
+
+.a11y__switch-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.a11y__switch-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.a11y__switch-desc {
+  font-size: 12px;
+  color: rgba(244, 244, 237, .62);
+}
+
+.a11y__toggle {
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(244, 244, 237, .22);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.a11y__toggle::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #F4F4ED;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.a11y__switch.is-on .a11y__toggle {
+  background: #0066CC;
+}
+
+.a11y__switch.is-on .a11y__toggle::after {
+  transform: translateX(18px);
+  background: #FFFFFF;
+}
+
+.a11y__reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 38px;
+  background: rgba(244, 244, 237, .09);
+  border: 1px solid rgba(244, 244, 237, .1);
+  border-radius: 10px;
+  color: #FFFFFF;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.a11y__reset:hover:not(:disabled) {
+  background: rgba(244, 244, 237, .15);
+}
+
+.a11y__reset:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+/* ==========================================================================
+   DOCUMENT-LEVEL EFFECTS DRIVEN BY THE ACCESSIBILITY WIDGET
+   ========================================================================== */
+:root[data-a11y-text="lg"] .rail__inner,
+:root[data-a11y-text="lg"] .shell__main > * {
+  zoom: 1.12;
+}
+
+:root[data-a11y-text="xl"] .rail__inner,
+:root[data-a11y-text="xl"] .shell__main > * {
+  zoom: 1.25;
+}
+
+:root[data-a11y-contrast="true"] {
+  --muted: #242F49;
+  --line: rgba(var(--ink-rgb), .38);
+  --line-strong: rgba(var(--ink-rgb), .55);
+  --accent-ink: #033368;
+}
+
+:root[data-a11y-contrast="true"][data-theme="dark"] {
+  --muted: rgba(237, 240, 246, .9);
+  --line: rgba(255, 255, 255, .32);
+  --line-strong: rgba(255, 255, 255, .5);
+  --accent-ink: #72B6F8;
+}
+
+:root[data-a11y-motion="true"],
+:root[data-a11y-motion="true"] *,
+:root[data-a11y-motion="true"] *::before,
+:root[data-a11y-motion="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+:root[data-a11y-links="true"] .shell__main a,
+:root[data-a11y-links="true"] .rail__nav a,
+:root[data-a11y-links="true"] .tabbar a {
+  text-decoration: underline !important;
+  text-underline-offset: .18em;
+}

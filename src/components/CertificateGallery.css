@@ -1,0 +1,146 @@
+.certs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.certs__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.certs__title {
+  margin-top: 3px;
+  font-size: clamp(20px, 1.8vw, 26px);
+  color: var(--navy);
+}
+
+.certs__lede {
+  margin-top: 6px;
+  max-width: 66ch;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.certs__lede code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: var(--paper);
+}
+
+.certs__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 14px;
+}
+
+.cert {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cert__media {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.cert__pdf-preview {
+  aspect-ratio: 14 / 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--tint);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cert__slot {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--navy);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.cert__body {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cert__name {
+  font-size: 15.5px;
+  color: var(--navy);
+}
+
+.cert__meta {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.cert__actions {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  padding: clamp(12px, 3vw, 28px);
+  background: rgba(6, 12, 26, .88);
+  display: grid;
+  place-items: center;
+}
+
+.cert-modal__box {
+  width: min(980px, 100%);
+  height: min(86vh, 820px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.cert-modal__bar {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cert-modal__bar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cert-modal__iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
