@@ -37,7 +37,7 @@ export const profile = {
 export const visitCounter = {
   value: 521,
   label: 'visits',
-  source: 'static' as 'static' | 'live',
+  source: 'live' as 'static' | 'live',
 };
 
 export type SocialKey = 'github' | 'facebook' | 'instagram';

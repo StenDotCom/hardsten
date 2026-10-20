@@ -4,7 +4,7 @@ import { navItems } from '../data/nav';
 import { NavIcon } from './icons/NavIcon';
 import { SocialIcon } from './icons/BrandIcons';
 import { IdentityBadge, Moon, Sun } from './icons/Icons';
-import { asset } from '../lib/utils';
+import { asset, useVisitCounter } from '../lib/utils';
 import type { Theme } from '../lib/utils';
 import './MobileNavigation.css';
 
@@ -16,10 +16,12 @@ interface Props {
 /**
  * Tablet & mobile layout (<1100px):
  *  1. Compact profile bar at the top of the page preserving avatar, name +
- *     identity badge, @Hardsten · 521 visits, social links and theme button.
+ *     identity badge, @Hardsten · live visits, social links and theme button.
  *  2. Fixed 5-item bottom pill tab bar modeled after the reference's `.tabbar`.
  */
 export function MobileNavigation({ theme, onToggleTheme }: Props) {
+  const visits = useVisitCounter();
+
   return (
     <>
       <header className="mhead" aria-label="Profile summary">
@@ -41,7 +43,7 @@ export function MobileNavigation({ theme, onToggleTheme }: Props) {
                 <span>{profile.username}</span>
                 <span aria-hidden="true"> · </span>
                 <span className="mhead__visits">
-                  {visitCounter.value.toLocaleString()} {visitCounter.label}
+                  {visits.toLocaleString()} {visitCounter.label}
                 </span>
               </p>
             </div>

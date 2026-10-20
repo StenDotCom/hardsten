@@ -4,7 +4,7 @@ import { navItems } from '../data/nav';
 import { NavIcon } from './icons/NavIcon';
 import { SocialIcon } from './icons/BrandIcons';
 import { IdentityBadge, Moon, Sun } from './icons/Icons';
-import { asset } from '../lib/utils';
+import { asset, useVisitCounter } from '../lib/utils';
 import type { Theme } from '../lib/utils';
 import './ProfileSidebar.css';
 
@@ -14,6 +14,8 @@ interface Props {
 }
 
 export function ProfileSidebar({ theme, onToggleTheme }: Props) {
+  const visits = useVisitCounter();
+
   return (
     <aside className="rail" aria-label="Profile and primary navigation">
       <div className="rail__inner">
@@ -44,13 +46,9 @@ export function ProfileSidebar({ theme, onToggleTheme }: Props) {
           <span>{profile.username}</span>
           <span
             className="rail__visits"
-            title={
-              visitCounter.source === 'live'
-                ? 'Tracked visit count'
-                : 'Initial static counter value (configurable in src/data/profile.ts)'
-            }
+            title="Live visitor count"
           >
-            {visitCounter.value.toLocaleString()} {visitCounter.label}
+            {visits.toLocaleString()} {visitCounter.label}
           </span>
         </p>
 
